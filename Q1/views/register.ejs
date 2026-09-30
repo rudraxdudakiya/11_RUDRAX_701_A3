@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>User Registration</h1>
+            <p>Please fill out all the fields below to create your account.</p>
+        </div>
+
+        <% if (error && error.general) { %>
+            <div class="alert-danger">
+                <%= error.general %>
+            </div>
+        <% } %>
+
+        <form action="/register" method="POST" enctype="multipart/form-data">
+            <!-- Username -->
+            <div class="form-group">
+                <label for="username" class="form-label">Username <span class="required">*</span></label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="<%= (error && error.username) ? 'is-invalid' : '' %>"
+                    value="<%= (formData && formData.username) ? formData.username : '' %>" 
+                    placeholder="Enter your username"
+                >
+                <% if (error && error.username) { %>
+                    <span class="error-text">* <%= error.username %></span>
+                <% } %>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address <span class="required">*</span></label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="<%= (error && error.email) ? 'is-invalid' : '' %>"
+                    value="<%= (formData && formData.email) ? formData.email : '' %>" 
+                    placeholder="name@example.com"
+                >
+                <% if (error && error.email) { %>
+                    <span class="error-text">* <%= error.email %></span>
+                <% } %>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password" class="form-label">Password <span class="required">*</span></label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    class="<%= (error && error.password) ? 'is-invalid' : '' %>"
+                    value="<%= (formData && formData.password) ? formData.password : '' %>" 
+                    placeholder="At least 6 characters"
+                >
+                <% if (error && error.password) { %>
+                    <span class="error-text">* <%= error.password %></span>
+                <% } %>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirm Password <span class="required">*</span></label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    class="<%= (error && error.confirmPassword) ? 'is-invalid' : '' %>"
+                    value="<%= (formData && formData.confirmPassword) ? formData.confirmPassword : '' %>" 
+                    placeholder="Re-enter your password"
+                >
+                <% if (error && error.confirmPassword) { %>
+                    <span class="error-text">* <%= error.confirmPassword %></span>
+                <% } %>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label class="form-label">Gender <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input 
+                            type="radio" 
+                            name="gender" 
+                            value="male" 
+                            <%= (formData && formData.gender === 'male') ? 'checked' : '' %>
+                        > Male
+                    </label>
+                    <label class="radio-item">
+                        <input 
+                            type="radio" 
+                            name="gender" 
+                            value="female" 
+                            <%= (formData && formData.gender === 'female') ? 'checked' : '' %>
+                        > Female
+                    </label>
+                    <label class="radio-item">
+                        <input 
+                            type="radio" 
+                            name="gender" 
+                            value="other" 
+                            <%= (formData && formData.gender === 'other') ? 'checked' : '' %>
+                        > Other
+                    </label>
+                </div>
+                <% if (error && error.gender) { %>
+                    <span class="error-text">* <%= error.gender %></span>
+                <% } %>
+            </div>
+
+            <!-- Hobbies -->
+            <div class="form-group">
+                <label class="form-label">Hobbies <span class="required">*</span></label>
+                <% 
+                    const currentHobbies = (formData && formData.hobbies) 
+                        ? (Array.isArray(formData.hobbies) ? formData.hobbies : [formData.hobbies]) 
+                        : []; 
+                %>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            name="hobbies" 
+                            value="reading" 
+                            <%= currentHobbies.includes('reading') ? 'checked' : '' %>
+                        > Reading
+                    </label>
+                    <label class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            name="hobbies" 
+                            value="traveling" 
+                            <%= currentHobbies.includes('traveling') ? 'checked' : '' %>
+                        > Traveling
+                    </label>
+                    <label class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            name="hobbies" 
+                            value="sports" 
+                            <%= currentHobbies.includes('sports') ? 'checked' : '' %>
+                        > Sports
+                    </label>
+                    <label class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            name="hobbies" 
+                            value="gaming" 
+                            <%= currentHobbies.includes('gaming') ? 'checked' : '' %>
+                        > Gaming
+                    </label>
+                    <label class="checkbox-item">
+                        <input 
+                            type="checkbox" 
+                            name="hobbies" 
+                            value="music" 
+                            <%= currentHobbies.includes('music') ? 'checked' : '' %>
+                        > Music
+                    </label>
+                </div>
+                <% if (error && error.hobbies) { %>
+                    <span class="error-text">* <%= error.hobbies %></span>
+                <% } %>
+            </div>
+
+            <!-- Upload Profile Picture (Single) -->
+            <div class="form-group">
+                <label for="profilePicture" class="form-label">Profile Picture (Single Upload) <span class="required">*</span></label>
+                <div class="file-input-wrapper">
+                    <input 
+                        type="file" 
+                        id="profilePicture" 
+                        name="profilePicture" 
+                        accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                        class="<%= (error && error.profilePicture) ? 'is-invalid' : '' %>"
+                    >
+                </div>
+                <div class="form-hint">Accepted: JPG, JPEG, PNG, GIF, WEBP (Max 5MB)</div>
+                <% if (error && error.profilePicture) { %>
+                    <span class="error-text">* <%= error.profilePicture %></span>
+                <% } %>
+            </div>
+
+            <!-- Upload Other Pictures (Multiple) -->
+            <div class="form-group">
+                <label for="otherPics" class="form-label">Other Pictures (Multiple Upload) <span class="required">*</span></label>
+                <div class="file-input-wrapper">
+                    <input 
+                        type="file" 
+                        id="otherPics" 
+                        name="otherPics" 
+                        multiple 
+                        accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+                        class="<%= (error && error.otherPics) ? 'is-invalid' : '' %>"
+                    >
+                </div>
+                <div class="form-hint">Select one or more images (Max 5 files, 5MB each)</div>
+                <% if (error && error.otherPics) { %>
+                    <span class="error-text">* <%= error.otherPics %></span>
+                <% } %>
+            </div>
+
+            <button type="submit" class="btn-submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

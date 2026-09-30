@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile (Protected Route 2)</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container wide">
+        <div class="nav">
+            <div class="nav-links">
+                <a href="/dashboard">Dashboard (Route 1)</a>
+                <a href="/profile" class="active">Profile (Route 2)</a>
+            </div>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+
+        <div class="header">
+            <h1>User Profile & Account</h1>
+            <p>Protected Route 2 &mdash; Account Settings & Details</p>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <th>Full Name</th>
+                <td><%= user.name %></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td><%= user.username %></td>
+            </tr>
+            <tr>
+                <th>Email Address</th>
+                <td><%= user.email %></td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td><span class="badge-role"><%= user.role %></span></td>
+            </tr>
+            <tr>
+                <th>Account Status</th>
+                <td><span style="color: green; font-weight: bold;">&#10003; Active</span></td>
+            </tr>
+            <tr>
+                <th>Session Active Since</th>
+                <td><%= user.loginTime %></td>
+            </tr>
+        </table>
+
+        <div class="hint-box">
+            This is the 2nd protected route. Access is verified using session authentication stored via the file session store.
+        </div>
+    </div>
+</body>
+</html>

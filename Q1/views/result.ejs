@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful - User Details</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container wide">
+        <div class="header">
+            <h1 style="color: #16a34a;">Registration Successful!</h1>
+            <p>Here are the details submitted during registration along with uploaded files.</p>
+        </div>
+
+        <table class="result-table">
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <td><strong><%= username %></strong></td>
+                </tr>
+                <tr>
+                    <th>Email Address</th>
+                    <td><%= email %></td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>
+                        <span class="badge" style="text-transform: capitalize;"><%= gender %></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Hobbies</th>
+                    <td>
+                        <% 
+                            const hobbyList = Array.isArray(hobbies) ? hobbies : [hobbies];
+                            hobbyList.forEach(hobby => { 
+                        %>
+                            <span class="badge" style="text-transform: capitalize;"><%= hobby %></span>
+                        <% }); %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Profile Picture<br><small style="color: #64748b; font-weight: normal;">(Single Upload)</small></th>
+                    <td>
+                        <div class="media-card">
+                            <img 
+                                src="/uploads/<%= profilePic.filename %>" 
+                                alt="Profile Picture" 
+                                class="media-thumbnail"
+                            >
+                            <div class="media-info">
+                                <div class="media-name"><%= profilePic.originalname %></div>
+                                <div class="media-meta">
+                                    Size: <%= (profilePic.size / 1024).toFixed(1) %> KB | Type: <%= profilePic.mimetype %>
+                                </div>
+                                <a href="/download/<%= profilePic.filename %>" class="download-link">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    Download Profile Picture
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Other Pictures<br><small style="color: #64748b; font-weight: normal;">(Multiple Upload)</small></th>
+                    <td>
+                        <% if (otherPics && otherPics.length > 0) { %>
+                            <% otherPics.forEach((pic, index) => { %>
+                                <div class="media-card">
+                                    <img 
+                                        src="/uploads/<%= pic.filename %>" 
+                                        alt="Other Picture <%= index + 1 %>" 
+                                        class="media-thumbnail"
+                                    >
+                                    <div class="media-info">
+                                        <div class="media-name"><%= pic.originalname %></div>
+                                        <div class="media-meta">
+                                            Size: <%= (pic.size / 1024).toFixed(1) %> KB | Type: <%= pic.mimetype %>
+                                        </div>
+                                        <a href="/download/<%= pic.filename %>" class="download-link">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                            Download Image <%= index + 1 %>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <span style="color: #64748b;">No other pictures uploaded</span>
+                        <% } %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="action-bar">
+            <a href="/" class="btn-secondary">&larr; Back to Registration</a>
+        </div>
+    </div>
+</body>
+</html>

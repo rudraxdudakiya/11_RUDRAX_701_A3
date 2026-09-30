@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - File Session Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>User Login</h1>
+            <p>Express application with File Session Store</p>
+        </div>
+
+        <% if (errorMessage) { %>
+            <div class="alert-danger"><%= errorMessage %></div>
+        <% } %>
+
+        <% if (successMessage) { %>
+            <div class="alert-success"><%= successMessage %></div>
+        <% } %>
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    value="<%= username || '' %>" 
+                    placeholder="Enter username" 
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter password" 
+                    required
+                >
+            </div>
+
+            <button type="submit" class="btn-primary">Sign In</button>
+        </form>
+
+        <div class="hint-box">
+            <strong>Default Credentials for Testing:</strong><br>
+            Username: <code>admin</code> | Password: <code>admin123</code><br>
+            Username: <code>student</code> | Password: <code>student123</code>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "q4",
+  "version": "1.0.0",
+  "description": "Admin panel of ERP system with session, Employee CRUD, salary calculation, email notification, and password encryption",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "express",
+    "mongoose",
+    "session",
+    "ejs",
+    "bcryptjs",
+    "nodemailer"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.3.1",
+    "nodemailer": "^6.9.13"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "q5-employee-portal",
+  "version": "1.0.0",
+  "description": "Assignment 3 - Question 5: Employee Site with JWT, Express, Mongoose, and React",
+  "scripts": {
+    "server": "cd server && node server.js",
+    "client": "cd client && npm run dev"
+  }
+}

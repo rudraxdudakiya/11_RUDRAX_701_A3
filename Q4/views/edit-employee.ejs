@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee - ERP Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div><strong>ERP Admin Panel</strong></div>
+            <div><a href="/dashboard" class="btn-secondary">&larr; Back to Employees</a></div>
+        </div>
+
+        <div class="header">
+            <h1>Edit Employee: <%= employee.empid %></h1>
+            <p>Update employee details and salary parameters.</p>
+        </div>
+
+        <% if (errorMessage) { %>
+            <div class="alert-danger"><%= errorMessage %></div>
+        <% } %>
+
+        <form action="/employees/edit/<%= employee._id %>" method="POST">
+            <div class="form-group">
+                <label class="form-label">Employee ID</label>
+                <input type="text" value="<%= employee.empid %>" disabled style="background: #f1f3f5;">
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="form-label">Full Name *</label>
+                <input type="text" id="name" name="name" value="<%= employee.name %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="email" value="<%= employee.email %>" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="department" class="form-label">Department</label>
+                    <select id="department" name="department">
+                        <option value="IT" <%= employee.department === 'IT' ? 'selected' : '' %>>IT</option>
+                        <option value="HR" <%= employee.department === 'HR' ? 'selected' : '' %>>HR</option>
+                        <option value="Finance" <%= employee.department === 'Finance' ? 'selected' : '' %>>Finance</option>
+                        <option value="Operations" <%= employee.department === 'Operations' ? 'selected' : '' %>>Operations</option>
+                        <option value="Marketing" <%= employee.department === 'Marketing' ? 'selected' : '' %>>Marketing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="designation" class="form-label">Designation</label>
+                    <input type="text" id="designation" name="designation" value="<%= employee.designation %>" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="basicSalary" class="form-label">Basic Salary (₹) *</label>
+                <input type="number" id="basicSalary" name="basicSalary" value="<%= employee.basicSalary %>" min="0" required>
+            </div>
+
+            <div class="hint-box" style="margin-bottom: 20px;">
+                Current Net Salary: <strong>₹<%= employee.netSalary.toLocaleString() %></strong><br>
+                Updating Basic Salary will automatically recalculate HRA, DA, Deductions, and Net Salary.
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%;">Update Employee</button>
+        </form>
+    </div>
+</body>
+</html>

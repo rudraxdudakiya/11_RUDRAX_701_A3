@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard (Protected Route 1 - Redis)</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container wide">
+        <div class="nav">
+            <div class="nav-links">
+                <a href="/dashboard" class="active">Dashboard (Route 1)</a>
+                <a href="/profile">Profile (Route 2)</a>
+            </div>
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+
+        <div class="header">
+            <h1>Welcome, <%= user.name %>!</h1>
+            <p>Protected Route 1 &mdash; User Dashboard (Redis Session Store)</p>
+        </div>
+
+        <div class="card">
+            <h3>Redis In-Memory Session Storage</h3>
+            <p style="font-size: 13px; color: #555; margin-top: 5px;">
+                Session key stored in Redis: <code>sess:<%= sessionId %></code>
+            </p>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <th>Session ID</th>
+                <td><code><%= sessionId %></code></td>
+            </tr>
+            <tr>
+                <th>Logged In As</th>
+                <td><strong><%= user.username %></strong> (<%= user.email %>)</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td><span class="badge-redis"><%= user.role %></span></td>
+            </tr>
+            <tr>
+                <th>Login Time</th>
+                <td><%= user.loginTime %></td>
+            </tr>
+            <tr>
+                <th>Storage Engine</th>
+                <td>Redis In-Memory Key-Value Store</td>
+            </tr>
+        </table>
+
+        <div class="hint-box">
+            This route is protected. The session is retrieved from the Redis database on every request.
+        </div>
+    </div>
+</body>
+</html>

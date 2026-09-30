@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee - ERP Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div><strong>ERP Admin Panel</strong></div>
+            <div><a href="/dashboard" class="btn-secondary">&larr; Back to Employees</a></div>
+        </div>
+
+        <div class="header">
+            <h1>Add New Employee</h1>
+            <p>Employee ID and password will be automatically generated and emailed.</p>
+        </div>
+
+        <% if (errorMessage) { %>
+            <div class="alert-danger"><%= errorMessage %></div>
+        <% } %>
+
+        <form action="/employees/add" method="POST">
+            <div class="form-group">
+                <label for="name" class="form-label">Full Name *</label>
+                <input type="text" id="name" name="name" placeholder="e.g. Ramesh Patel" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="e.g. ramesh@company.com" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="department" class="form-label">Department</label>
+                    <select id="department" name="department">
+                        <option value="IT">IT</option>
+                        <option value="HR">HR</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Operations">Operations</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="designation" class="form-label">Designation</label>
+                    <input type="text" id="designation" name="designation" placeholder="e.g. Software Engineer" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="basicSalary" class="form-label">Basic Salary (₹) *</label>
+                <input type="number" id="basicSalary" name="basicSalary" placeholder="e.g. 50000" min="0" required>
+            </div>
+
+            <div class="hint-box" style="margin-bottom: 20px;">
+                <strong>Automatic Salary Breakdown on Save:</strong><br>
+                • HRA: 20% of Basic<br>
+                • DA: 10% of Basic<br>
+                • Deductions (PF/Tax): 5% of Basic<br>
+                • Net Salary = Basic + HRA + DA - Deductions
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%;">Create Employee & Send Credentials</button>
+        </form>
+    </div>
+</body>
+</html>
